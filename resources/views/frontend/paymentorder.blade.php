@@ -59,7 +59,9 @@
                                             <div class="product-subtitle"></div>
                                         </td>
                                     </tr>
+                               
                                     @php $totalPrice += $cart->product->Price @endphp
+                                    @php $allprice = $totalPrice * $cart -> Quantity  @endphp
                                 @endforeach
                             </tbody>
                         </table>
@@ -83,7 +85,7 @@
                     <input type="hidden" class="form-control" name="city" value="{{ $city }} " />
                     <input type="hidden" class="form-control" name="zip_code" value="{{ $zip_code }} " />
                     <input type="hidden" class="form-control" name="phone" value="{{ $phone }} " />
-                    <input type="hidden" class="form-control" name="total_price" value="{{ $totalPrice }} " />
+                    <input type="hidden" class="form-control" name="total_price" value="{{ $allprice }} " />
                     <div class="row mb-2" data-aos="fade-up" data-aos-delay="200" id="locations">
                         <div class="col-md-6">
                             <div class="form-group">

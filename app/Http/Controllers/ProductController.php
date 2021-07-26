@@ -85,11 +85,21 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = Product::findOrFail($id);
-        $data = $request -> all();
-        $data['ThumbnailPhoto'] = $request->file('ThumbnailPhoto')->store('assets/product', 'public',$request->file('ThumbnailPhoto')->GetClientOriginalName());
+       
 
-        $insert =  $item -> update($data);
+        if(empty($request->ThumbnailPhoto)){
+            $item = Product::findOrFail($id);
+            $data = $request -> all();
+            $insert =  $item -> update($data);
+        }
+        else{
+            $item = Product::findOrFail($id);
+            $data = $request -> all();
+            $data['ThumbnailPhoto'] = $request->file('ThumbnailPhoto')->store('assets/product', 'public',$request->file('ThumbnailPhoto')->GetClientOriginalName());
+    
+            $insert =  $item -> update($data);
+        }
+     
 
         return redirect()->route('product.index');
 

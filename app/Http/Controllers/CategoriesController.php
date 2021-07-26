@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
     public function ctigasapi(){
-        $data  =  Product::with('galleries')->where('Categories','Iga Sapi')->get();
-        $item  =  Product::with('galleries')->where('Categories','Iga Sapi')->first();
+        $data  =  Product::with('galleries')->where('Categories','Daging Iga Sapi')->get();
+        $item  =  Product::with('galleries')->where('Categories','Daging Iga Sapi')->first();
         return view('frontend.categories.ctigasapi',compact('data','item'));
     }
     public function cthas(){
