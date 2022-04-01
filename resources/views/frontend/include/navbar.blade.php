@@ -18,6 +18,9 @@
                     <li class="nav-item mt-2">
                         <a class="nav-link" href="{{ route('aboutme') }}">About Me</a>
                     </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="{{ route('help-center') }}">FaQ</a>
+                    </li>
                     @auth
                         <li class="nav-item mt-2">
                             <a class="nav-link" href="{{ route('orderhistory')}}">Order History</a>

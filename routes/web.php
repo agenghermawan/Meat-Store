@@ -24,6 +24,7 @@ Route::get('/detail/{id}', [App\Http\Controllers\LandingPageController::class, '
 Route::post('/detail/{id}', [App\Http\Controllers\LandingPageController::class, 'add'])->name('detail-add');
 
 Route::get('/categories', [App\Http\Controllers\LandingPageController::class, 'categories'])->name('categories');
+Route::get('/help-center', [App\Http\Controllers\LandingPageController::class, 'faq'])->name('help-center');
 
 Route::get('/categories-igasapi', [App\Http\Controllers\CategoriesController::class, 'ctigasapi'])->name('ctigasapi');
 Route::get('/categories-has', [App\Http\Controllers\CategoriesController::class, 'cthas'])->name('cthas');

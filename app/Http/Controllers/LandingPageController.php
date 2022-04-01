@@ -71,4 +71,8 @@ class LandingPageController extends Controller
     public function aboutme(){
         return view('frontend.about');
     }
+    public function faq()
+    {
+        return view('frontend.faq');
+    }
 }
