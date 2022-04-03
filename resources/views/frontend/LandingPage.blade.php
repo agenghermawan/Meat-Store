@@ -1,5 +1,8 @@
 @extends('frontend.include.app')
 @section('content')
+    @php
+        use RealRashid\SweetAlert\Facades\Alert;
+    @endphp
     <div class="page-content page-home">
         <section class="store-carousel">
             <div class="container">
@@ -70,18 +73,43 @@
                     </div>
                 </div>
                 <div class="row">
-                    @for($i = 0; $i < 4; $i++)
+                    @foreach($data as $item)
                     <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
                         <div class="menu-item" style="position: relative">
-                            <img src="{{ asset('frontend/images/daginghas2.jpg') }}" style="object-fit: cover" alt="Makeup Categories"
+                            <img src="{{ Storage::url($item->ThumbnailPhoto)}}" style="object-fit: cover" alt="Makeup Categories"
                             class="w-100" height="217px" />
-                            <span class="btn btn-primary text-mute price-menu" style=""> Rp 20.000</span>          
+                            <span class="btn btn-primary text-mute price-menu" style=""> Rp {{$item -> Price}}</span>          
                         </div>
-                        <p class="title-menu"> Makanan Terbaik  </p>
-                        <a href="" class="btn btn-dark">Buy Now </a>
-                        <a href="" class="btn add-to-card">Add to Card </a>
+                        <p class="title-menu"> {{$item->ProductName}} </p>
+                        <div class="row">
+                            @auth
+                            <form action="{{ route('detail-add', $item->id) }}" method="POST"
+                                enctype="multipart/form-data" class="mr-2">
+                                @csrf
+                                <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
+                                    Buy Now
+                                </button>
+                            </form>
+                            <form class="addtocard">
+                                <input type="hidden" name="addtocard" class="addtocard" value="true">
+                                <input type="hidden" name="id" value="{{$item->id}}" class="product-id">
+                                <button type="submit" class="btn add-to-card px-4 btn-block mb-3">
+                                    Add to card
+                                </button>
+                            </form>
+                            @endauth
+                            @guest
+                            <form action="{{ route('detail-add', $item->id) }}" method="POST"
+                                enctype="multipart/form-data" class="mr-2">
+                                @csrf
+                                <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
+                                    Buy Now
+                                </button>
+                            </form>
+                            @endguest
+                        </div>
                       </div>   
-                    @endfor
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -113,7 +141,74 @@
             </div>
         </section>
     </div>
+    @auth
+        @php
+            $carts = \App\Models\Cart::where('users_id', Auth::user()->id)->count();
+        @endphp
+    @endauth
+    @guest
+        @php
+        $carts = 0
+       @endphp
+    @endguest
+      
 @endsection
+
+@push('addon-script')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+
+        $(".addtocard").submit(function (event){
+            event.preventDefault();
+            var idproduct = $('.product-id').val();
+            var addtocard = $('.addtocard').val();
+
+            var Data = {
+                id : idproduct,
+                addtocard : "true",
+            }
+            console.log(idproduct)
+            var addtocard = $.ajax({
+                type: 'post',
+                url: "/detail/"+idproduct,
+                data: Data,
+                dateType: "text",
+                success: function(result){
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Berhasil Memasukan ke keranjang'
+                    })
+                    var carts = parseInt({{ $carts }})
+                    console.log(carts);
+                    $(".cart-badge").html(carts + 1)
+                }
+            })
+            addtocard.error(function(e) {
+                alert('salah')
+            })
+        })
+    </script>
+@endpush
+
 @push('addon-style')
     <style>
     .categories .row img {

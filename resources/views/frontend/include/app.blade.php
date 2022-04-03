@@ -7,7 +7,7 @@
 </head>
 
 <body>
-
+    @include('sweetalert::alert')
     @include('frontend.include.navbar')
 
     @yield('content')

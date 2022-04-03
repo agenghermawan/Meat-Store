@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\LandingPageController::class, 'index'])->name('landingpage');
 Route::get('/detail/{id}', [App\Http\Controllers\LandingPageController::class, 'detail'])->name('detail');
-Route::post('/detail/{id}', [App\Http\Controllers\LandingPageController::class, 'add'])->name('detail-add');
+Route::post('/detail/{id}', [App\Http\Controllers\LandingPageController::class, 'add'])->name('detail-add')->middleware('auth');
 
 Route::get('/categories', [App\Http\Controllers\LandingPageController::class, 'categories'])->name('categories');
 Route::get('/help-center', [App\Http\Controllers\LandingPageController::class, 'faq'])->name('help-center');

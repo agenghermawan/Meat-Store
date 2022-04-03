@@ -6,10 +6,10 @@
 
     <div class="page-content page-categories">  
     
-    <h2 class="container-fluid mr-2 mb-5 font-weight-bold"> Order History </h5>
+    <h2 class="container mr-2 mb-5 font-weight-bold"> Order History </h5>
 
     </div>
-    <div class="card" >
+    <div class="card container" >
         <div class="col-12 mt-2">
                 <div class="card-body">
                 <h4 class="font-weight-bold"> Order ID/{{ $history-> code }}/{{$history -> transaction_status}}/ {{$history -> created_at}} </h4>

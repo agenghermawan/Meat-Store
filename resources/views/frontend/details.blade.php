@@ -144,8 +144,6 @@
                                             <span class="fa fa-star checked"></span>
                                             @endif
                                           </div>
-                      
-                                        
                                     </div>
                                         {{ $item -> review}}
                                     </div>
@@ -153,29 +151,22 @@
                                 @endforeach
                             </ul>
                         </div>
-
-                     
                         <div class="col-lg-12 col-md-12 col-sm-12 mt-4">
                             <h5> Beri Ulasan Kepada Product Ini : </h5>
                             <form action="{{ route('addreview',$data -> id)}}" method="POST" enctype="multipart/form-data" class="d-inline">
                                 @csrf
                                 @method('POST')
                                 <div class="stars">
-                                    <input class="star star-5" id="star-5" type="radio" name="rating" value="5" />
                                      <label class="star star-5" for="star-5"></label> <input class="star star-4" id="star-4" type="radio" name="rating" value="4"/>
                                       <label class="star star-4" for="star-4"></label> <input class="star star-3" id="star-3" type="radio" name="rating" value="3" /> 
                                       <label class="star star-3" for="star-3"></label> <input class="star star-2" id="star-2" type="radio" name="rating"  value="2"/>
                                        <label class="star star-2" for="star-2"></label> <input class="star star-1" id="star-1" type="radio" name="rating" value="1" />
-                                        <label class="star star-1" for="star-1"></label> 
                                 </div>
                             <textarea name="review" class="form-control" id="" cols="5" rows="4"> </textarea>
-                        
                             <div class="col-lg-10 ">
-
                             </div>
                             <div class="col-lg-2 mt-4 mr-5">
                                 <button class="btn btn-primary"> Add Review  </button>
-
                                 </form>
                             </div>
 

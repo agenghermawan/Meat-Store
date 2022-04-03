@@ -42,7 +42,7 @@
                             </thead>
                             <tbody>
                                 @php $totalPrice = 0 @endphp
-                                @foreach ($carts as $cart)
+                                @forelse ($carts as $cart)
                                     <tr>
                                         <td style="width: 20%;">
                                             @if ($cart->product->galleries)
@@ -57,18 +57,20 @@
                                             <div class="product-title">Rp {{ number_format($cart->product->Price) }}</div>
                                         </td>
                                         <td style="width: 20%;">
-                                            <input type="number" name="Quantity" style="width: 100px" class="form-control mt-3" placeholder="" required>
+                                            <input type="number" name="Quantity" style="width: 100px" min="0" required class="form-control mt-3" placeholder="" required>
                                         </td>
                                         <td style="width: 35%;">
                                             <meta name="csrf-token" content="{{ csrf_token() }}">
-                                            <button class="btn btn-remove-cart" id="deleterecord"
+                                            <button class="btn btn-remove-cart deleterecord" 
                                                 type="button" data-id="{{ $cart->id }}">
                                                 Remove
                                             </button>
                                         </td>
                                     </tr>
                                     @php $totalPrice += $cart->product->Price @endphp
-                                @endforeach
+                                    @empty
+                                        <p class="text-center my-5"> Keranjang anda masih kosong , Silahkan memilih makanan yang ingin anda beli </p>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -99,14 +101,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_one">Address 1</label>
-                                <input type="text" class="form-control" name="address_one" value="Setra Duta Cemara" />
+                                <input type="text" class="form-control" name="address_one" placeholder="Setra Duta Cemara" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_two">Address 2</label>
                                 <input type="text" class="form-control" id="address_two" name="address_two"
-                                    value="Blok B2 No. 34" />
+                                    placeholder="Blok B2 No. 34" />
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -133,13 +135,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="zip_code">Postal Code</label>
-                                <input type="text" class="form-control" id="zip_code" name="zip_code" />
+                                <input type="text" class="form-control" id="zip_code" name="zip_code" required />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone_number">Mobile</label>
-                                <input type="text" class="form-control" id="phone_number" name="phone" />
+                                <input type="text" class="form-control" id="phone_number" name="phone"  required/>
                             </div>
                         </div>
                     </div>
@@ -159,7 +161,7 @@
 
 @section('script')
 <script>
-    $("#deleterecord").click(function() {
+    $(".deleterecord").click(function() {
         var id = $(this).data("id");
         var token = $("meta[name='csrf-token']").attr("content");
 
@@ -174,9 +176,7 @@
                 console.log("it Works");
             }
         });
-
         location.reload(true);
-
     });
 
 </script>

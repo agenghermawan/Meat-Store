@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class LandingPageController extends Controller
@@ -29,7 +30,6 @@ class LandingPageController extends Controller
        $data =  Product::with('galleries')->findOrFail($id);
         return view('frontend.details',compact('data','review'));
     }
-
         public function add(Request $request,$id){
            $data = [
             'products_id' => $id,
@@ -37,8 +37,11 @@ class LandingPageController extends Controller
         ];
 
         Cart::create($data);
-
-        return redirect()->route('cart.index');
+        if($request->addtocard == true){
+            return 'Berhasil menambahkan data';
+        }else{
+            return redirect()->route('cart.index');
+        }
     }
 
         public function categories(){
@@ -67,7 +70,6 @@ class LandingPageController extends Controller
     public function ordershow(Request $request, $id)
     {
         $history = Transaction::with('transactiondetail.product.galleries')->where('id',$id)->first();
-
         $items = TransactionDetail::with('transaction','product.galleries')->where('transactions_id',$id)->get();
         return view('frontend.showhistory',compact('history','items'));
     }

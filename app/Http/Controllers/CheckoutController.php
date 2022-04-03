@@ -20,7 +20,6 @@ class CheckoutController extends Controller
 
     public function checkoutdata(Request $request)
     {
-
         DB::table('carts')->update([
             'Quantity' => $request -> Quantity,
         ]);
@@ -81,14 +80,12 @@ class CheckoutController extends Controller
               Cart::with(['product','user'])
                 ->where('users_id', Auth::user()->id)
                 ->delete();
-
                     Config::$serverKey = config('services.midtrans.serverKey');
                     Config::$isProduction = config('services.midtrans.isProduction');
                     Config::$isSanitized = config('services.midtrans.isSanitized');
                     Config::$is3ds = config('services.midtrans.is3ds');
 
                  // Buat array untuk dikirim ke midtrans
-
             $midtrans = array(
             'transaction_details' => array(
                 'order_id' =>  $code,
