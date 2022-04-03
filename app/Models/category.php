@@ -12,8 +12,8 @@ class category extends Model
         'name','description'
     ];
 
-    public function product()
-    {
-        return $this->hasMany(product::class);
-    }
+    // public function product()
+    // {
+    //     return $this->hasOne(product::class,'category_id','id');
+    // }
 }

@@ -13,7 +13,6 @@ class Product extends Model
         'Price',
         'Description',
         'Image',
-        'Categories',
         'Weight',
         'ThumbnailPhoto',
         'category_id',
@@ -25,8 +24,8 @@ class Product extends Model
         public function user(){
         return $this->hasOne( User::class, 'id', 'users_id');
     }
-    public function category()
-    {
-        return $this->hasOne(category::class);
-    }
+    // public function category()
+    // {
+    //     return $this->belongsTo(category::class,'');
+    // }
 }

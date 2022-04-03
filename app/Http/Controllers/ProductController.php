@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
 use App\Models\Product;
 use App\Models\ProductGallery;
 use Illuminate\Http\Request;
@@ -26,7 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('backend.product.create');
+        $category = category::select('name','id')->get();
+        return view('backend.product.create',compact('category'));
     }
 
     /**
@@ -41,8 +43,6 @@ class ProductController extends Controller
         $data['ThumbnailPhoto'] = $request->file('ThumbnailPhoto')->store('assets/product', 'public',$request->file('ThumbnailPhoto')->GetClientOriginalName());
 
         $product =  Product::create($data);
-
-
         $gallery = [
             'Products_id' => $product -> id,
             'Photos' =>  $request->file('ThumbnailPhoto')->store('assets/product', 'public'),
@@ -72,7 +72,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $data = Product::findOrFail($id);
+        $data = [
+          'product' => Product::findOrFail($id),
+          'category' => category::all(),
+        ];
         return view('backend.product.edit',compact('data'));
     }
 
@@ -85,7 +88,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
+
 
         if(empty($request->ThumbnailPhoto)){
             $item = Product::findOrFail($id);
@@ -96,10 +99,10 @@ class ProductController extends Controller
             $item = Product::findOrFail($id);
             $data = $request -> all();
             $data['ThumbnailPhoto'] = $request->file('ThumbnailPhoto')->store('assets/product', 'public',$request->file('ThumbnailPhoto')->GetClientOriginalName());
-    
+
             $insert =  $item -> update($data);
         }
-     
+
 
         return redirect()->route('product.index');
 
@@ -115,7 +118,7 @@ class ProductController extends Controller
     {
         ProductGallery::with('Product')->where('Products_id',$id)->delete();
         Product::findOrFail($id)->delete();
-        
+
         return redirect()->route('product.index');
     }
 }

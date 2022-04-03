@@ -1,7 +1,6 @@
 @extends('backend.include.app')
 
 @section('content')
-
     <div class="section-content section-dashboard-home">
         <div class="container-fluid">
             <div class="dashboard-heading">
@@ -13,7 +12,8 @@
             <div class="dashboard-content">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('product.update',$data -> id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('product.update', $data['product']->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card">
@@ -23,31 +23,24 @@
                                             <div class="form-group">
                                                 <label for="name">Product Name</label>
                                                 <input type="text" class="form-control" id="name" aria-describedby="name"
-                                                    name="ProductName" value="{{ $data -> ProductName}}" />
+                                                    name="ProductName" value="{{ $data['product']->ProductName }}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="price">Price</label>
                                                 <input type="number" class="form-control" id="price"
-                                                    aria-describedby="price" name="Price" value="{{$data -> Price}}" />
+                                                    aria-describedby="price" name="Price"
+                                                    value="{{ $data['product']->Price }}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="categories">Category</label>
                                                 <select class="form-control" id="category" name="Categories">
-                                                    <option>{{$data -> Categories}}</option>
-                                                    @if ($data -> Categories == 'Daging Ayam')
-                                                    <option>Daging Has</option>
-                                                    <option>Daging Iga Sapi</option>
-                                                    @elseif($data -> Categories == 'Daging Has') 
-                                                    <option>Daging Ayam</option>
-                                                    <option>Daging Iga Sapi</option>
-                                                    @else
-                                                    <option>Daging Ayam</option>
-                                                    <option>Daging Has</option>
-                                                    @endif
+                                                    @foreach ($data['category'] as $item)
+                                                        <option>{{ $item->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -55,14 +48,15 @@
                                             <div class="form-group">
                                                 <label for="categories">Weight (Kg) </label>
                                                 <input type="number" class="form-control" id="price"
-                                                    aria-describedby="price" name="Weight" value="{{ $data -> Weight}}" />
+                                                    aria-describedby="price" name="Weight"
+                                                    value="{{ $data['product']->Weight }}" />
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="description">Description</label>
                                                 <textarea name="Description" id="" cols="30" rows="4"
-                                                    class="form-control"> {{$data -> Description }}</textarea>
+                                                    class="form-control"> {{ $data['product']->Description }}</textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12">

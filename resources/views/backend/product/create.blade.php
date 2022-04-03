@@ -1,7 +1,6 @@
 @extends('backend.include.app')
 
 @section('content')
-
     <div class="section-content section-dashboard-home">
         <div class="container-fluid">
             <div class="dashboard-heading">
@@ -35,10 +34,11 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="categories">Category</label>
-                                                <select class="form-control" id="category" name="Categories">
-                                                    <option>Daging Ayam</option>
-                                                    <option>Daging Has</option>
-                                                    <option>Daging Iga Sapi</option>
+                                                <select class="form-control" id="category" name="category_id">
+                                                    <option> == Select Category == </option>
+                                                    @foreach ($category as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -52,8 +52,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="description">Description</label>
-                                                <textarea name="Description" id="" cols="30" rows="4"
-                                                    class="form-control"></textarea>
+                                                <textarea name="Description" id="" cols="30" rows="4" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
