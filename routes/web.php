@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductGalleriesController;
 use App\Http\Controllers\TransactionController;
@@ -36,7 +39,8 @@ Route::post('/show-order/{id}',[App\Http\Controllers\LandingPageController::clas
 
 Route::post('/checkout/callback',[App\Http\Controllers\CheckoutController::class, 'callback'])->name('midtrans-callback');
 Route::get('/about-me',[App\Http\Controllers\LandingPageController::class, 'aboutme'])->name('aboutme');
-
+Route::get('sign-in-google',[LoginController::class,'google'])->name('user.login.google');
+Route::get('auth/google/callback',[LoginController::class,'handleCallback'])->name('google-callback');
 
 Auth::routes();
 
@@ -44,16 +48,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth', 'admin'])
     ->group(function() {
-
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-
-Route::resource('product', ProductController::class);
-Route::resource('transaction', TransactionController::class);
-Route::resource('product-galleries', ProductGalleriesController::class);
-
+        Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('product', ProductController::class);
+        Route::resource('transaction', TransactionController::class);
+        Route::resource('product-galleries', ProductGalleriesController::class);
+        Route::resource('category', CategoryController::class);
     });
 
 Route::resource('cart', CartController::class);
+
+Route::get('/edit/profile/{id}',[LandingPageController::class,'editProfile'])->name('editProfile');
+Route::put('/update/profile/{id}',[LandingPageController::class,'updateProfile'])->name('updateProfile');
 
 Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'process'])->name('checkout');
 Route::post('/checkout/callback', [App\Http\Controllers\CheckoutController::class, 'callback'])->name('midtrans-callback');

@@ -1,7 +1,5 @@
 @extends('frontend.include.app')
-
 @section('content')
-
     <!-- Page Content -->
     <div class="page-content page-categories">
         <section class="store-trend-categories">
@@ -9,7 +7,6 @@
                 <div class="row">
                     <div class="col-12 text-center" data-aos="fade-up">
                         <h5 class="text-center"> About Me</h5>
-                        <img src="{{ asset('frontend/images/dagingbg.png') }}" alt="">
                     </div>
                 </div>
                 <div class="row mt-4">

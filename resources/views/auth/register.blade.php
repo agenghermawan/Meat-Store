@@ -1,7 +1,6 @@
 @extends('frontend.include.app')
 
 @section('content')
-
     <div class="page-content page-auth mt-5" id="register" style="padding-top:50px">
         <div class="section-store-auth" data-aos="fade-up">
             <div class="container">
@@ -17,7 +16,6 @@
                                 <label>Full Name</label>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -30,6 +28,17 @@
                                     name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Telp</label>
+                                <input id="telp" type="text" class="form-control @error('telp') is-invalid @enderror"
+                                    name="telp" value="{{ old('telp') }}" required autocomplete="telp">
+
+                                @error('telp')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

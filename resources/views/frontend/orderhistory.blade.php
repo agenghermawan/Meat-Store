@@ -9,7 +9,7 @@
         <div class="card">
             <div class="col-12 mt-2">
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table container">
                             <thead class="thead-light">
                               <tr>
                                 <th scope="col" class="pt-4 pb-4">Code Order</th>

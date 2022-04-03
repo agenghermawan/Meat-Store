@@ -9,7 +9,6 @@
                 <div class="row">
                     <div class="col-12 text-center" data-aos="fade-up">
                         <h5 class="text-center"> Categories</h5>
-                        <img src="{{ asset('frontend/images/dagingbg.png') }}" alt="">
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -49,38 +48,10 @@
                 </div>
             </div>
         </section>
-        <section class="store-new-products mt-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center" data-aos="fade-up">
-                        <h5 class="text-center">All Product </h5>
-                        <img src="{{ asset('frontend/images/daging3.png') }}" width="80px" height="57px" alt="">
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    @php $incrementProduct = 0 @endphp
-                    @foreach ($data as $item)
-                        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-right"
-                            data-aos-delay="{{ $incrementProduct += 100 }}">
-                            <a class="component-products d-block" href="{{ route('detail', $item->id) }}">
-                                <div class="products-thumbnail">
-                                    <div class="products-image"
-                                        style="background-image: url('{{ Storage::url($item->galleries->first()->Photos) }}');">
-                                    </div>
-                                </div>
-                                <div class="products-text">
-                                    {{ $item->ProductName }}
-                                </div>
-                                <div class="products-price">
-                                    Rp {{ number_format($item->Price)  }}
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
+     
     </div>
 
 
 @endsection
+
+@section('fixed', 'fixed-bottom')

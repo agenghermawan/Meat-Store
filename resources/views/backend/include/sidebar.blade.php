@@ -7,6 +7,7 @@
            <a href="{{ route('product.index') }}" class="list-group-item list-group-item-action">My Products</a>
            <a href="{{ route('product-galleries.index') }}" class="list-group-item list-group-item-action">Product
                Galleries</a>
+           <a href="{{ route('category.index') }}" class="list-group-item list-group-item-action">Category</a>
            <a href="{{ route('transaction.index') }}" class="list-group-item list-group-item-action">Transactions</a>
        </div>
    </div>

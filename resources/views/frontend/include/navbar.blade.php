@@ -62,6 +62,7 @@
                                 @if (Auth::user()->roles == 'ADMIN')
                                 <a class="dropdown-item" href="{{ route('dashboard')}}">Dashboard</a>
                                 @endif
+                                <a class="dropdown-item" href="{{ route('editProfile',Auth::user()->id)}}">Edit Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <form action="{{route('logout')}}" method="post">
                                 @csrf

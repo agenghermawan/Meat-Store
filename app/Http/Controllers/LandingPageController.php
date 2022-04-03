@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\updateProfileRequest;
 use App\Models\Cart;
 use App\Models\Review;
 use App\Models\Product;
 use App\Models\TransactionDetail;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+
 
 class LandingPageController extends Controller
 {
@@ -74,5 +79,36 @@ class LandingPageController extends Controller
     public function faq()
     {
         return view('frontend.faq');
+    }
+    public function editProfile($id)
+    {
+        $data = User::find($id);
+        return view('frontend.editprofile',compact('data'));
+    }
+    public function updateProfile(Request $request, $id)
+    {
+        $data = $request->all();
+        Validator::make($data, [
+            'name' => ['required'],
+            'email' => ['required'],
+            'telp' => ['required'],
+            'old_password' => ['required'],
+            'new_password' => ['required'],
+            'password_confirm' => ['same:new_password'],
+        ])->validate();
+
+        $user = User::find(auth()->user()->id);
+        if (!Hash::check($data['old_password'], $user->password)) {
+            return back()->with('error', 'The specified password does not match the database password');
+        }
+
+        User::find($id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'telp' => $request->telp,
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return back();
     }
 }

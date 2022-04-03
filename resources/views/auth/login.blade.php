@@ -47,6 +47,10 @@
                         <a class="btn btn-signup w-100 mt-2" href="{{ route('register') }}">
                             Sign Up
                         </a>
+                        <a class="btn btn-signup w-100 mt-2" href="{{ route('user.login.google') }}">
+                            Login with Google
+                        </a>
+
                     </div>
                 </div>
             </div>
