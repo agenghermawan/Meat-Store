@@ -60,14 +60,12 @@ class LandingPageController extends Controller
 
     public function orderhistory()
     {
-
-
         $history = Transaction::with('transactiondetail.product.galleries')->where('users_id',Auth::user()->id)->get();
         return view('frontend.orderhistory',compact('history'));
     }
 
     public function ordershow(Request $request, $id)
-    {   
+    {
         $history = Transaction::with('transactiondetail.product.galleries')->where('id',$id)->first();
 
         $items = TransactionDetail::with('transaction','product.galleries')->where('transactions_id',$id)->get();
@@ -87,6 +85,7 @@ class LandingPageController extends Controller
     }
     public function updateProfile(Request $request, $id)
     {
+        dd($request->file('avatar'));
         $data = $request->all();
         Validator::make($data, [
             'name' => ['required'],
@@ -100,6 +99,10 @@ class LandingPageController extends Controller
         $user = User::find(auth()->user()->id);
         if (!Hash::check($data['old_password'], $user->password)) {
             return back()->with('error', 'The specified password does not match the database password');
+        }
+
+        if($request->file('avatar')){
+            $data['store'] = $request->file('avatar')->store('image/avatar','public');
         }
 
         User::find($id)->update([

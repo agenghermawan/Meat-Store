@@ -54,8 +54,13 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ asset('frontend/images/icon-user.png') }}" alt=""
+                                @if (Auth::user()->avatar == null )
+                                    <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name}}" alt=""
                                     class="rounded-circle mr-2 profile-picture" />
+                                    @else
+                                    <img src="{{ Storage::url(Auth::user()->avatar)}}" alt=""
+                                    class="rounded-circle mr-2 profile-picture" />
+                                @endif
                                 Hi, {{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">

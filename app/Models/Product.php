@@ -15,7 +15,8 @@ class Product extends Model
         'Image',
         'Categories',
         'Weight',
-        'ThumbnailPhoto'
+        'ThumbnailPhoto',
+        'category_id',
     ];
 
      public function galleries(){
@@ -23,5 +24,9 @@ class Product extends Model
     }
         public function user(){
         return $this->hasOne( User::class, 'id', 'users_id');
+    }
+    public function category()
+    {
+        return $this->hasOne(category::class);
     }
 }
