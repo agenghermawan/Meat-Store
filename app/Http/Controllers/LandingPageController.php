@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\updateProfileRequest;
 use App\Models\Cart;
+use App\Models\category;
 use App\Models\Review;
 use App\Models\Product;
 use App\Models\TransactionDetail;
@@ -46,7 +47,8 @@ class LandingPageController extends Controller
 
         public function categories(){
          $data  =  Product::with('galleries')->get();
-        return view('frontend.categories',compact('data'));
+         $category = category::all();
+        return view('frontend.categories',compact('data','category'));
 
     }
 
@@ -115,5 +117,9 @@ class LandingPageController extends Controller
         ]);
 
         return back();
+    }
+    public function success()
+    {
+        return view('frontend.successfully');
     }
 }

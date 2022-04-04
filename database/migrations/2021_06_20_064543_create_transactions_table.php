@@ -27,6 +27,8 @@ class CreateTransactionsTable extends Migration
             $table->string('zip_code');
             $table->string('phone');
             $table->string('code');
+            $table->string('evidence')->nullable();
+            $table->enum('method',['auto','manual'])->nullable();
             $table->timestamps();
         });
     }

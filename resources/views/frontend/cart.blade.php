@@ -61,7 +61,7 @@
                                         </td>
                                         <td style="width: 35%;">
                                             <meta name="csrf-token" content="{{ csrf_token() }}">
-                                            <button class="btn btn-remove-cart deleterecord" 
+                                            <button class="btn btn-remove-cart deleterecord"
                                                 type="button" data-id="{{ $cart->id }}">
                                                 Remove
                                             </button>
@@ -83,32 +83,32 @@
                         <h2 class="mb-4">Shipping Details</h2>
                     </div>
                 </div>
-               
+
                     <input type="hidden" name="total_price" value="{{ $totalPrice }}">
                     <div class="row mb-2" data-aos="fade-up" data-aos-delay="200" id="locations">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_one">Name </label>
-                                <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }} " />
+                                <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }} " required />
                             </div>
                         </div>
                         <div class=" col-md-6">
                             <div class="form-group">
                                 <label for="address_one">Mail </label>
-                                <input type="text" class="form-control" name="email" value="{{ Auth::user()->email }}" />
+                                <input type="text" class="form-control" name="email" value="{{ Auth::user()->email }}" required />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_one">Address 1</label>
-                                <input type="text" class="form-control" name="address_one" placeholder="Setra Duta Cemara" />
+                                <input type="text" class="form-control" name="address_one" placeholder="Setra Duta Cemara" required />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_two">Address 2</label>
                                 <input type="text" class="form-control" id="address_two" name="address_two"
-                                    placeholder="Blok B2 No. 34" />
+                                    placeholder="Blok B2 No. 34" required />
                             </div>
                         </div>
                         <div class="col-md-12">

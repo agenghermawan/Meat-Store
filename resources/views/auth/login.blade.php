@@ -11,8 +11,8 @@
                             class="w-50 mb-4 mb-lg-none" />
                     </div>
                     <div class="col-lg-5">
-                        <h2>
-                            Belanja kebutuhan utama, <br />
+                        <h2 style="font-size: 24px;font-weight: 600;color: #28a745">
+                            Membeli makanan di hellokitchen, <br />
                             menjadi lebih mudah
                         </h2>
                         <form class="mt-3" method="POST" action="{{ route('login') }}">
@@ -48,7 +48,7 @@
                             Sign Up
                         </a>
                         <a class="btn btn-signup w-100 mt-2" href="{{ route('user.login.google') }}">
-                            <i class="fa fa-google"></i> 
+                            <i class="fa fa-google"></i>
                             Login with Google
                         </a>
                     </div>

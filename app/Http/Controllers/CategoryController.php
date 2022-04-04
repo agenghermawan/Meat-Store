@@ -37,12 +37,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validator =  Validator::make($request->all(),[
+        $data = $request->all();
+        $validator =  Validator::make($data,[
             'name' => 'required',
             'description' => 'required | max:255',
+            'image' => 'required|image:jpg,png,jpeg',
         ])->validate();
 
-        category::create($request->all());
+        $data['image']= $request->file('image')->store('image/category','public');
+
+        category::create($data);
         return back();
     }
 

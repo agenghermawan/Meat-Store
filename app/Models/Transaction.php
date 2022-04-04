@@ -10,7 +10,7 @@ class Transaction extends Model
 {
     use HasFactory;
         protected $fillable = [
-        'users_id', 
+        'users_id',
         'total_price',
         'transaction_status',
         'name',
@@ -22,6 +22,8 @@ class Transaction extends Model
         'phone',
         'city',
         'code',
+        'method',
+        'evidence',
     ];
 
     protected $hidden = [
@@ -34,7 +36,7 @@ class Transaction extends Model
     public function transactiondetail(){
         return $this->hasOne( TransactionDetail::class, 'transactions_id', 'id');
     }
-    
+
 
     public function getCreatedAttribute()
     {

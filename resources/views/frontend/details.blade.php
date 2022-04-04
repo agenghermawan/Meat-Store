@@ -58,7 +58,7 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
-                                        Add to Cart
+                                        Buy now
                                     </button>
                                 </form>
                             @endauth
@@ -85,7 +85,7 @@
             </section>
 
             @php
-            $count = App\Models\Review::where('Products_id',$data -> id)->count();    
+            $count = App\Models\Review::where('Products_id',$data -> id)->count();
         @endphp
 
             <section class="store-review">
@@ -95,81 +95,6 @@
                             <h5>Customer Review ( {{$count}} )
                             </h5>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-lg-12">
-                            <ul class="list-unstyled">
-                                @foreach ($review as $item)
-                                <li class="media" style="height: 100px">
-                                    <img src="/images/icon-testimonial-1.png" class="mr-3 rounded-circle" alt="" />
-                                    <div class="media-body">
-                                        <div class="row">
-                                          <h5 class="font-weight-bold">{{ $item -> user -> name}}</h5> 
-                                          <div class="startreview ml-5">
-                                            @if ($item -> rating == 1)
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star "></span>
-                                            <span class="fa fa-star "></span>
-                                            <span class="fa fa-star "></span>
-                                            <span class="fa fa-star"></span>
-    
-                                            @elseif($item -> rating == 2 )
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star "></span>
-                                            <span class="fa fa-star "></span>
-                                            <span class="fa fa-star"></span>
-                                                
-                                            @elseif($item -> rating == 3)
-    
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star "></span>
-                                            <span class="fa fa-star"></span>
-    
-                                            @elseif($item -> rating == 4)
-    
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star"></span>
-                                            @elseif($item -> rating == 5)
-    
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            @endif
-                                          </div>
-                                    </div>
-                                        {{ $item -> review}}
-                                    </div>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 mt-4">
-                            <h5> Beri Ulasan Kepada Product Ini : </h5>
-                            <form action="{{ route('addreview',$data -> id)}}" method="POST" enctype="multipart/form-data" class="d-inline">
-                                @csrf
-                                @method('POST')
-                                <div class="stars">
-                                     <label class="star star-5" for="star-5"></label> <input class="star star-4" id="star-4" type="radio" name="rating" value="4"/>
-                                      <label class="star star-4" for="star-4"></label> <input class="star star-3" id="star-3" type="radio" name="rating" value="3" /> 
-                                      <label class="star star-3" for="star-3"></label> <input class="star star-2" id="star-2" type="radio" name="rating"  value="2"/>
-                                       <label class="star star-2" for="star-2"></label> <input class="star star-1" id="star-1" type="radio" name="rating" value="1" />
-                                </div>
-                            <textarea name="review" class="form-control" id="" cols="5" rows="4"> </textarea>
-                            <div class="col-lg-10 ">
-                            </div>
-                            <div class="col-lg-2 mt-4 mr-5">
-                                <button class="btn btn-primary"> Add Review  </button>
-                                </form>
-                            </div>
-
                     </div>
                 </div>
             </section>
@@ -208,7 +133,7 @@
 @endpush
 
 @section('style')
-    
+
 <style></style>
 <style>
     .stars {

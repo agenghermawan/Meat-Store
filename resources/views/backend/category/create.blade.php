@@ -41,6 +41,18 @@
                                                 </small>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="thumbnails">Image Category</label>
+                                                <input type="file" class="form-control" name="image">
+                                                @error('description')
+                                                <div class="text text-danger">{{$message}}</div>
+                                                @enderror
+                                                <small class="text-muted">
+                                                    Kamu dapat menambahkan descripsi kategori
+                                                </small>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

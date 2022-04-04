@@ -8,11 +8,11 @@
                     <div class="col-lg-4">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-                            <h2>
-                                Memulai untuk jual beli <br />
+                            <h2 style="font-size: 24px;font-weight: 600;color: #28a745 " class="text-center">
+                                Membeli makanan di hellokitchen<br />
                                 dengan cara terbaru
                             </h2>
-                            <div class="form-group">
+                            <div class="form-group mt-5">
                                 <label>Full Name</label>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -65,9 +65,9 @@
                                 Sign Up Now
                             </button>
                         </form>
-                        <button type="submit" class="btn btn-signup btn-block mt-2">
+                        <a type="submit" href="{{route('login')}}" class="btn btn-signup btn-block mt-2">
                             Back to Sign In
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -66,3 +66,6 @@ Route::post('/order', [App\Http\Controllers\CheckoutController::class, 'order'])
 
 Route::post('/checkoutdata', [App\Http\Controllers\CheckoutController::class, 'checkoutdata'])->name('checkoutdata');
 
+Route::get('successfully',[LandingPageController::class,'success'])->name('success');
+
+
